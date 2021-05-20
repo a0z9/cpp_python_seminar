@@ -1,0 +1,20 @@
+from distutils.core import setup, Extension
+from smtpd import usage
+
+setup(name='strmodule', 
+      version='1.0',
+      description='bla bla my module for testing',
+      license='MIT',
+      # packages=['tst_modules'],
+      author='And Rei',
+      author_email='a0z9r@rambler.ru',
+      keywords=['my package', 'extra module'],
+      url='https://github.com/a0z9/strmodule',
+      long_description = 'simple usage!',
+      platforms = 'x64',  
+      ext_modules=[Extension('mymodule01', ['mymodule01.c'])])
+
+
+# run from shell:
+# python setup.py install
+#

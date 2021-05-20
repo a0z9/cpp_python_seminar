@@ -1,0 +1,62 @@
+import ctypes
+import os
+
+
+class Book(ctypes.Structure):
+    _fields_ = [('author',ctypes.c_char_p),
+                ('title',ctypes.c_char_p),
+                ('year', ctypes.c_int)]
+    
+    def __repr__(self):
+        return'[{0}, {1}, {2}]'.format(self.author.decode(), self.title.decode(), self.year)
+
+
+os.add_dll_directory(r'C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin')
+clib = ctypes.CDLL(r'C:\Users\And\eclipse-workspace-2021-luxoft\lib03\Debug\liblib03.dll')
+
+print(clib)
+print(clib.swap)
+
+a = ctypes.c_int64(100)
+b = ctypes.c_int64(2)
+
+print("a=%6s, b=%6s" % (a.value, b.value))
+clib.swap(ctypes.byref(a), ctypes.byref(b))
+print("a=%6s, b=%6s" % (a.value, b.value))
+print('--------------')
+
+# start Test Book structure
+
+print(clib.gen_book)
+
+clib.gen_book.argtypes = [ctypes.c_char_p,ctypes.c_char_p,ctypes.c_int]
+clib.gen_book.restype = ctypes.POINTER(Book)
+
+buf1 = ctypes.create_string_buffer(56)
+buf1.value = b'Jack London'
+buf2 = ctypes.create_string_buffer(50)
+buf2.value = '"Белое безмолвие"'.encode('utf8')
+
+book1 = clib.gen_book(buf1,buf2,1976)
+print(book1)
+print(book1.contents)
+
+clib.free_book(book1)
+
+# end of Test Book structure
+# get time string from c
+
+from enum import IntEnum
+     
+class menum(IntEnum):
+    sec=0
+    millis=1
+    micro=2
+    nano=3
+
+clib.time_str.argtypes = [ctypes.c_size_t]
+clib.time_str.restype = ctypes.c_char_p
+pstr = clib.time_str(menum.millis)
+    
+print(pstr)
+    

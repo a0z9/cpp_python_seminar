@@ -1,0 +1,18 @@
+extern "C" {
+
+typedef struct
+{
+ char * author;
+ char * title;
+ int year;
+ //......
+
+ } book;
+
+ void free_book(book* );
+ book * gen_book(char *, char *, int);
+
+ void swap(int *,  int *);
+
+
+}

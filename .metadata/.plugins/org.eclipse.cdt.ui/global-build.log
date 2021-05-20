@@ -1,0 +1,4 @@
+23:31:03 **** Incremental Build of configuration Debug for project lib03 ****
+Info: Internal Builder is used for build
+g++ -std=c++2a -O0 -g3 -Wall -c -fmessage-length=0 -o "src\\lib03.o" "..\\src\\lib03.cpp" 
+g++ -shared -o lib_for_python.dll "src\\lib03.o" 

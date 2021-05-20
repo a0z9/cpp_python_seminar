@@ -1,0 +1,17 @@
+import ctypes
+import os
+
+os.add_dll_directory(r'C:\Program Files\mingw-w64\x86_64-8.1.0-win32-seh-rt_v6-rev0\mingw64\bin')
+clib = ctypes.CDLL(r'C:\Users\And\eclipse-workspace-2021-luxoft\lib03\Debug\liblib03.dll')
+
+print(clib)
+print(clib.swap)
+
+a = ctypes.c_int64(100)
+b = ctypes.c_int64(2)
+
+print("a=%6s, b=%6s" % (a.value, b.value))
+clib.swap(ctypes.byref(a), ctypes.byref(b))
+print("a=%6s, b=%6s" % (a.value, b.value))
+print('--------------')
+print(clib.gen_book)

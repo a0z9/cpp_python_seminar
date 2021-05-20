@@ -1,0 +1,20 @@
+include "lib03.h"
+
+extern "C" {
+
+
+
+book * gen_book(char * a, char * t, int year)
+{
+  book* bk = new book{a,b,t};
+
+
+}
+
+void swap(int * a,  int * b){
+	int c = *a; *a = *b; *b = c;
+}
+
+
+
+}

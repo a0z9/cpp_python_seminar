@@ -1,0 +1,12 @@
+extern "C" {
+
+typedef struct
+{
+ char * author;
+ char * title;
+ int year;
+ //......
+
+ } book;
+
+}

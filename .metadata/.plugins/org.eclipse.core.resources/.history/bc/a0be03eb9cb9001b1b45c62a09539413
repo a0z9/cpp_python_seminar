@@ -1,0 +1,18 @@
+
+typedef struct
+{
+ char* author;
+ char* title;
+ int year;
+ //......
+
+ } book;
+
+enum class mm {sec, millis, micro, nano};
+
+extern "C" {
+
+ void free_book(book* );
+ book * gen_book(char*, char*, int);
+ void swap(int*, int*);
+}

@@ -1,0 +1,63 @@
+#define PY_SSIZE_T_CLEAN
+#include <Python.h>
+#include <time.h>
+#include <stdio.h>
+
+
+static PyObject *
+run_system(PyObject *self, PyObject *args)
+{
+    const char *command;
+    int sts;
+
+    if (!PyArg_ParseTuple(args, "s", &command))
+        return NULL;
+    sts = system(command);
+    return PyLong_FromLong(sts);
+}
+
+static PyObject *
+time_string( PyObject *self)
+{
+
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    char buffer[21];
+    sprintf(buffer,"%04d-%02d-%02d_%02d:%02d:%02d",
+    		tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday,
+			tm.tm_hour, tm.tm_min, tm.tm_sec);
+    return Py_BuildValue("s", buffer);
+}
+
+
+static char mymodule01_docs[] =
+   "time_string( ): get time string from c!!\n"
+   "system(): run system command!!!\n";
+
+
+static PyMethodDef mymodule01_funcs[] = {
+   {"time", (PyCFunction)time_string, METH_NOARGS, mymodule01_docs},
+   {"system", (PyCFunction)run_system,METH_VARARGS, mymodule01_docs},
+   {NULL,NULL}
+};
+
+// deprecated
+/*void initmymodule01(void) {
+   Py_InitModule3("mymodule01", mymodule01_funcs,
+                  "Extension module example!");
+}*/
+
+static struct PyModuleDef mymodule01 =
+{
+    PyModuleDef_HEAD_INIT,
+    "mymodule01",     /* name of module */
+	mymodule01_docs,  /* module documentation */
+    -1,   /* size of per-interpreter state of the module, or -1 if the module keeps state in global variables. */
+	mymodule01_funcs
+};
+
+PyMODINIT_FUNC PyInit_mymodule01(void)
+{
+    return PyModule_Create(&mymodule01);
+}
+

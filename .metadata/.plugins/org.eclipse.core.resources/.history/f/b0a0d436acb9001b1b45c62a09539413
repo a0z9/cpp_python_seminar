@@ -1,0 +1,37 @@
+from distutils.core import setup, Extension
+from smtpd import usage
+
+setup(name='strmodule', 
+      version='1.0',
+      description='bla bla my module for testing',
+      license='MIT',
+      # packages=['tst_modules'],
+      author='And Rei',
+      author_email='a0z9r@rambler.ru',
+      keywords=['my package', 'extra module'],
+      url='https://github.com/a0z9/strmodule',
+      long_description = 'simple usage!',
+      platforms = 'x64',  
+      ext_modules=[Extension('mymodule01', ['mymodule01.c'])])
+
+
+# from distutils.core import setup, Extension
+#
+# module1 = Extension('demo',
+#                     define_macros = [('MAJOR_VERSION', '1'),
+#                                      ('MINOR_VERSION', '0')],
+#                     include_dirs = ['/usr/local/include'],
+#                     libraries = ['tcl83'],
+#                     library_dirs = ['/usr/local/lib'],
+#                     sources = ['demo.c'])
+#
+# setup (name = 'PackageName',
+#        version = '1.0',
+#        description = 'This is a demo package',
+#        author = 'Martin v. Loewis',
+#        author_email = 'martin@v.loewis.de',
+#        url = 'https://docs.python.org/extending/building',
+#        long_description = '''
+# This is really just a demo package.
+# ''',
+#        ext_modules = [module1])
